@@ -5,6 +5,10 @@ import seaborn as sns
 import json
 from streamlit_lottie import st_lottie
 
+
+# Page configuration
+st.set_page_config(page_title="WhatsApp Chat Analyzer", layout="wide")
+
 st.markdown("""
     <style>
         .st-lottie {
@@ -19,8 +23,6 @@ def load_lottie_local(filepath: str):
     with open(filepath, "r") as f:
         return json.load(f)
 
-# Page configuration
-st.set_page_config(page_title="WhatsApp Chat Analyzer", layout="wide")
 
 # Styling for light mode
 st.markdown("""
