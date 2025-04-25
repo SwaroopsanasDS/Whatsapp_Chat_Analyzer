@@ -63,9 +63,9 @@ if uploaded_file is not None:
 
     if st.sidebar.button("Show Analysis"):
         # Load Lottie animations
-        analysis_animation_path = r"C:\Users\DELL\Desktop\bia.DEC24\16_whatsapp_chat_analyzer\animations\analysis_loader.json"
-        whatsapp_animation_path = r"C:\Users\DELL\Desktop\bia.DEC24\16_whatsapp_chat_analyzer\animations\loader.json"
-
+        analysis_animation_path = "animations/analysis_loader.json"
+        whatsapp_animation_path = "animations/loader.json"
+        
         col1, col2 = st.columns([3, 1])
         with col1:
             st_lottie(load_lottie_local(analysis_animation_path), speed=1, width=200, height=200)
