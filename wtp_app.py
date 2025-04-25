@@ -5,6 +5,15 @@ import seaborn as sns
 import json
 from streamlit_lottie import st_lottie
 
+st.markdown("""
+    <style>
+        .st-lottie {
+            background-color: transparent !important;
+            box-shadow: none !important;
+        }
+    </style>
+""", unsafe_allow_html=True)
+
 # Load Lottie animation from a local file
 def load_lottie_local(filepath: str):
     with open(filepath, "r") as f:
