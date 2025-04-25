@@ -4,7 +4,7 @@ A simple Streamlit app to analyze WhatsApp chat data. Upload your exported `.txt
 
 ## Live Demo
 
-Check out the live demo here: [WhatsApp Chat Analyzer]([https://your-whatsapp-analyzer.streamlit.app](https://whatsappchatanalyzer-crh7wzpqfxo36r3myw52dj.streamlit.app/))
+Check out the live demo here: [WhatsApp Chat Analyzer](https://whatsappchatanalyzer-crh7wzpqfxo36r3myw52dj.streamlit.app/)
 
 ## Features
 - Basic chat statistics
