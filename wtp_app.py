@@ -2,20 +2,18 @@ import streamlit as st
 import preprocessor, helper
 import matplotlib.pyplot as plt
 import seaborn as sns
-import requests
-from streamlit_lottie import st_lottie  # Import st_lottie
-
 import json
+from streamlit_lottie import st_lottie
 
 # Load Lottie animation from a local file
 def load_lottie_local(filepath: str):
     with open(filepath, "r") as f:
         return json.load(f)
 
-
-# Page config and custom styles
+# Page config
 st.set_page_config(page_title="WhatsApp Chat Analyzer", layout="wide")
 
+# Custom Styles
 st.markdown("""
     <style>
         .stApp {
@@ -64,21 +62,18 @@ if uploaded_file is not None:
     selected_user = st.sidebar.selectbox("Show analysis with respect to", user_list)
 
     if st.sidebar.button("Show Analysis"):
-        # Load Lottie animations from local files
+        # Load Lottie animations
         analysis_animation_path = r"C:\Users\DELL\Desktop\bia.DEC24\16_whatsapp_chat_analyzer\animations\analysis_loader.json"
         whatsapp_animation_path = r"C:\Users\DELL\Desktop\bia.DEC24\16_whatsapp_chat_analyzer\animations\loader.json"
 
-        col1, col2 = st.columns([3, 1])  # Create two columns
+        col1, col2 = st.columns([3, 1])
         with col1:
-            st_lottie(load_lottie_local(analysis_animation_path), speed=1, width=200, height=200)  # Reduced size
+            st_lottie(load_lottie_local(analysis_animation_path), speed=1, width=200, height=200)
         with col2:
             st_lottie(load_lottie_local(whatsapp_animation_path), speed=1, width=200, height=200)
 
-
-        # Perform analysis (this could take some time)
+        # Top Statistics
         num_messages, words, num_media_messages, num_links = helper.fetch_stats(selected_user, df)
-
-        # Display the analysis
         st.markdown("<h2 style='color:#ae81ff;'>Top Statistics</h2>", unsafe_allow_html=True)
         col1, col2, col3, col4 = st.columns(4)
         with col1:
@@ -125,13 +120,14 @@ if uploaded_file is not None:
             plt.xticks(rotation="vertical")
             st.pyplot(fig)
 
+        # Heatmap
         st.markdown("<h2 style='color:#00bcd4;'>Weekly Activity Heatmap</h2>", unsafe_allow_html=True)
         user_heatmap = helper.activity_heatmap(selected_user, df)
         fig, ax = plt.subplots()
         sns.heatmap(user_heatmap, cmap="mako", ax=ax)
         st.pyplot(fig)
 
-        # Busiest Users
+        # Most Busy Users
         if selected_user == "Overall":
             st.markdown("<h2 style='color:#ae81ff;'>Most Busy Users</h2>", unsafe_allow_html=True)
             x, new_df = helper.most_busy_users(df)
@@ -144,7 +140,7 @@ if uploaded_file is not None:
             with col2:
                 st.dataframe(new_df)
 
-        # WordCloud
+        # Word Cloud
         st.markdown("<h2 style='color:#ae81ff;'>Word Cloud</h2>", unsafe_allow_html=True)
         df_wc = helper.create_wordcloud(selected_user, df)
         fig, ax = plt.subplots()
@@ -155,28 +151,15 @@ if uploaded_file is not None:
         # Most Common Words
         most_common_df = helper.most_common_words(selected_user, df)
         st.markdown("<h2 style='color:#ae81ff;'>Most Common Words</h2>", unsafe_allow_html=True)
-
-        # Use columns to place the animation on the right side
-        col1, col2 = st.columns([3, 1])  # Larger column for the table, smaller column for the animation
-        with col1:
-            # Display the "Most Common Words" table
-            st.dataframe(most_common_df)
-
-            # Most Common Words bar chart
-            fig, ax = plt.subplots()
-            ax.barh(most_common_df[0], most_common_df[1], color="skyblue")
-            plt.xticks(rotation="horizontal")
-            st.pyplot(fig)
-
-        with col2:
-            # Display the WhatsApp animation in the right column, at the bottom of the Most Common Words section
-            whatsapp_animation_path = r"C:\Users\DELL\Desktop\bia.DEC24\16_whatsapp_chat_analyzer\animations\loader.json"  # Correct path to WhatsApp animation
-            st_lottie(load_lottie_url(whatsapp_animation_path), speed=1, width=200, height=200)
+        st.dataframe(most_common_df)
+        fig, ax = plt.subplots()
+        ax.barh(most_common_df[0], most_common_df[1], color="skyblue")
+        plt.xticks(rotation="horizontal")
+        st.pyplot(fig)
 
         # Emoji Analysis
         emoji_df = helper.emoji_helper(selected_user, df)
         st.markdown("<h2 style='color:#ae81ff;'>Emoji Analysis</h2>", unsafe_allow_html=True)
-
         if not emoji_df.empty:
             col1, col2 = st.columns(2)
             with col1:
