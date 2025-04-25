@@ -2,6 +2,10 @@
 
 A simple Streamlit app to analyze WhatsApp chat data. Upload your exported `.txt` file to view message stats, user activity (in groups), common words, emoji usage, and activity timelines through clean visualizations.
 
+## Live Demo
+
+Check out the live demo here: [WhatsApp Chat Analyzer](https://your-whatsapp-analyzer.streamlit.app)
+
 ## Features
 - Basic chat statistics
 - Group member activity analysis
@@ -22,6 +26,7 @@ A simple Streamlit app to analyze WhatsApp chat data. Upload your exported `.txt
 2. Launch the Streamlit app.
 3. Upload the `.txt` file.
 4. View your chat insights instantly.
+
 
 ## License
 This project is open-source and available under the [MIT License](LICENSE).
